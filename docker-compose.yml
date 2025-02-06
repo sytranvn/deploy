@@ -8,8 +8,8 @@ services:
         - AUTH_SYSTEM_ENABLED=False
         - BACKEND_API_HOST=backend-api
         - BACKEND_API_PORT=8000
-        - BACKEND_API_USERNAME=admin
-        - BACKEND_API_PASSWORD=admin
+        - BACKEND_API_USERNAME=${BACKEND_API_USERNAME:-admin}
+        - BACKEND_API_PASSWORD=${BACKEND_API_PASSWORD:?error}
     volumes:
       - ./credentials.yml:/home/dashboard/credentials.yml
       - ./pages:/home/dashboard/frontend/pages
@@ -28,8 +28,8 @@ services:
     environment:
       - BROKER_HOST=emqx
       - BROKER_PORT=1883
-      - USERNAME=admin
-      - PASSWORD=admin
+      - USERNAME=${USERNAME:-admin}
+      - PASSWORD=${PASSWORD:?error}
     networks:
       - emqx-bridge
   emqx:
